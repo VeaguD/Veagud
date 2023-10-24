@@ -27,4 +27,6 @@ public class Proem {
 
     //ограничение расстояния (точка начала лестницы от дальней стены)
     int lengthOtStenDoCraya = 3000;
+
+    boolean isRightDirection = true;
 }

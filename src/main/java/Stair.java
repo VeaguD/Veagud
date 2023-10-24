@@ -13,4 +13,7 @@ public class Stair {
     boolean hasNogi = true;
     int shirinamarsha = 1000;
     int betweenMarsh = 100;
+
+    int countZabStupen;
+    boolean isRightDirection = true;
 }

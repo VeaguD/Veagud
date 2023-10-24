@@ -1,13 +1,17 @@
 
 
 import javax.swing.*;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class OldClassCadScript {
 
     public static void main(String[] args) {
 
-        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe";
+//        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe";
+        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\accoreconsole.exe";
+
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -33,7 +37,11 @@ public class OldClassCadScript {
                 proem.setMaxT(Integer.parseInt(dialog.getMaxTText()));
                 proem.setLengthOtStenDoCraya(Integer.parseInt(dialog.getLengthOtStenDoCrayaText()));
                 proem.setHasNogi(dialog.isSelectedValue());
-                scriptPath = AcadScripCreate.createScriptsPodschetom(proem);
+                if (dialog.getDirectionSelector().equals("Левый подъём")) {
+                    proem.isRightDirection = false;
+                }
+                System.out.println(dialog.getDirectionSelector());
+                scriptPath = AcadScripCreate.createScriptsPodschetom(proem, dialog.getPathSaveAuto());
             } else {
                 stair.setHeightStupen(Double.parseDouble(dialog.getHeightStupenText()));
                 stair.setLowerStairsCount(Integer.parseInt(dialog.getLowerStairsCountText()));
@@ -42,20 +50,44 @@ public class OldClassCadScript {
                 stair.setPloshadka(Integer.parseInt(dialog.getShirinaPloshadki()));
                 stair.setStupenGlubina(Integer.parseInt(dialog.getStupenGlubinaText()));
                 stair.setHasNogi(dialog.isSelectedValue());
-                scriptPath = AcadScripCreate.createScripts(stair);
+                stair.setCountZabStupen(dialog.getSelectorCountZabStup());
+                if (dialog.getDirectionSelector().equals("Левый подъём")) {
+                    stair.isRightDirection = false;
+                }
+                System.out.println(dialog.getDirectionSelector());
+                scriptPath = AcadScripCreate.createScripts(stair, dialog.getPathSaveMono());
 
             }
+        } else {
+            System.exit(0);
         }
 
 
-        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath);
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
-//        try {
-//            Process process = processBuilder.start();
-//            Thread.currentThread().interrupt();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
+
+//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath);
+        String scrFilePath = "C:\\Users\\Loshadka\\Pictures\\" + nameScr;
+        String pathModule = "C:\\Users\\Loshadka\\AppData\\Roaming\\Autodesk\\ApplicationPlugins\\AVC_Pro.bundle\\Contents\\Windows\\AVC_Starter.dll";
+        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath, "/loadmodule", pathModule);
+//       это для логировная в файл
+        File outputFile = new File("output.txt");
+        processBuilder.redirectOutput(outputFile);
+        try {
+
+            Process process = processBuilder.start();
+            //это для логировная в файл
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), "Windows-1251"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.exit(0); // Завершает программу и останавливает главный поток
     }
