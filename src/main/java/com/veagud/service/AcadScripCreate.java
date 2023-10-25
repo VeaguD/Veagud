@@ -1,14 +1,21 @@
+package com.veagud.service;
+
+import com.veagud.model.Proem;
+import com.veagud.model.Stair;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AcadScripCreate {
+
+    @Value("${save.scripts.path}")
+    private static String saveScriptsPath;
 
     public static String createScriptsPodschetom(Proem proem, String pathSave) {
 
@@ -16,13 +23,13 @@ public class AcadScripCreate {
         int length = proem.getLength();
         int height = proem.getHeight();
 
-        boolean hasNogi = proem.hasNogi;
-        int chistovoiPol = proem.chistovoiPol;
+        boolean hasNogi = proem.isHasNogi();
+        int chistovoiPol = proem.getChistovoiPol();
         //упразднить, дававать зазор межмаршевого пространства
-        int shirinamarsha = proem.shirinamarsha;
+        int shirinamarsha = proem.getShirinamarsha();
         int otstup = proem.getOtstup();
 //изначально предполагаемая площадка
-        int ploshadkaShirinaTeor = proem.ploshadkaShirinaTeor;
+        int ploshadkaShirinaTeor = proem.getPloshadkaShirinaTeor();
         int ploshadkaShirina = 0;
         int stupenGlubina = 0;
         int lengthChist = length - otstup;
@@ -33,14 +40,14 @@ public class AcadScripCreate {
         double bestC = 0;
 
 //Диапозон высот ступеней
-        double minVValue = proem.minVValue;
-        double maxVValue = proem.maxVValue;
+        double minVValue = proem.getMinVValue();
+        double maxVValue = proem.getMaxVValue();
         // Диапазон для глубины Ступени
-        int minT = proem.minT;
-        int maxT = proem.maxT;
+        int minT = proem.getMinT();
+        int maxT = proem.getMaxT();
 
 //ограничение расстояния (точка начала лестницы от дальней стены)
-        int lengthOtStenDoCraya = proem.lengthOtStenDoCraya;
+        int lengthOtStenDoCraya = proem.getLengthOtStenDoCraya();
 
         int startLowerStairsDistance = length - lengthOtStenDoCraya;
 
@@ -102,7 +109,7 @@ public class AcadScripCreate {
 
             String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
 
-            Path scriptPath = Paths.get("C:\\Scripts acad", nameScr); // Укажите путь, куда вы хотите сохранить файл
+            Path scriptPath = Paths.get(saveScriptsPath, nameScr); // Укажите путь, куда вы хотите сохранить файл
 
             try (PrintWriter writer = new PrintWriter(scriptPath.toFile())) {
 
@@ -126,11 +133,11 @@ public class AcadScripCreate {
 
                 generatePlatform(writer, otstup, length, width,
                         ploshadkaShirina, visotaploshadki, shirinamarsha,
-                        heightStupen, proem.isRightDirection);
+                        heightStupen, proem.isRightDirection());
 //опорные ноги
                 drawSupports(writer, otstup, length, width,
                         ploshadkaShirina, visotaploshadki,
-                        heightStupen, hasNogi, proem.isRightDirection);
+                        heightStupen, hasNogi, proem.isRightDirection());
 
 //Опорные пластины у основания
 
@@ -341,7 +348,7 @@ public class AcadScripCreate {
                     vidSperedi(writer);
                 }
 
-                int count = proem.isRightDirection ? upperStairsCount : lowerStairsCount;
+                int count = proem.isRightDirection() ? upperStairsCount : lowerStairsCount;
                 for (int i = 0; i < count; i++) {
                     drawStep(writer, elev, pliney1, pliney2, pliney3, pliney4, pliney6,
                             pliney5, pery2, tochka1Zoom, tochka2Zoom, otstup, stupenGlubina,
@@ -361,7 +368,7 @@ public class AcadScripCreate {
 
 //Верхний марш
                 vidSZadi(writer);
-                int count2 = proem.isRightDirection ? lowerStairsCount : upperStairsCount;
+                int count2 = proem.isRightDirection() ? lowerStairsCount : upperStairsCount;
                 for (int i = 0; i < count2; i++) {
                     drawStep(writer, elevV, pliney1V, pliney2V, pliney3V, pliney4V, pliney6V,
                             pliney5V, pery2V, tochka1ZoomV, tochka2ZoomV, otstup, stupenGlubina,
@@ -665,7 +672,7 @@ public class AcadScripCreate {
     }
 
     //это тренировочный метод для того что бы понять как рисовать забежные ступени createScripts1 метода убери 1 и будет все ок
-//    public static String createScripts(Stair stair, String path) {
+//    public static String createScripts(com.veagud.model.Stair stair, String path) {
 //        int width = stair.getBetweenMarsh() + stair.getOtstup() * 2 + stair.getShirinamarsha() * 2;
 //        int length = stair.getUpperStairsCount() * stair.getStupenGlubina() + stair.getPloshadka() + stair.getOtstup();
 //        double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getHeightStupen();
@@ -732,15 +739,15 @@ public class AcadScripCreate {
 ////            double XTreug2Right = width - XTreug2;
 ////            double XTreug3Right = width - XTreug3;
 ////
-////            List<TriangleData> triangles = new ArrayList<>();
-////            triangles.add(new TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, tochkaNachalaY, XTreug1, YTreug1, heightStupen));
-////            triangles.add(new TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, YTreug1, XTreug1, YTreug2, XTreug2, YTreug2, heightStupen * 2));
-////            triangles.add(new TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug2, YTreug2, XTreug3, YTreug2, heightStupen * 3));
-////            triangles.add(new TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, tochkaNachalaY, XTreug1Right, YTreug1, heightStupen * 6));
-////            triangles.add(new TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, YTreug1, XTreug1Right, YTreug2, XTreug2Right, YTreug2, heightStupen * 5));
-////            triangles.add(new TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug2Right, YTreug2, XTreug3Right, YTreug2, heightStupen * 4));
+////            List<com.veagud.model.TriangleData> triangles = new ArrayList<>();
+////            triangles.add(new com.veagud.model.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, tochkaNachalaY, XTreug1, YTreug1, heightStupen));
+////            triangles.add(new com.veagud.model.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, YTreug1, XTreug1, YTreug2, XTreug2, YTreug2, heightStupen * 2));
+////            triangles.add(new com.veagud.model.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug2, YTreug2, XTreug3, YTreug2, heightStupen * 3));
+////            triangles.add(new com.veagud.model.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, tochkaNachalaY, XTreug1Right, YTreug1, heightStupen * 6));
+////            triangles.add(new com.veagud.model.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, YTreug1, XTreug1Right, YTreug2, XTreug2Right, YTreug2, heightStupen * 5));
+////            triangles.add(new com.veagud.model.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug2Right, YTreug2, XTreug3Right, YTreug2, heightStupen * 4));
 ////
-////            for (TriangleData data : triangles) {
+////            for (com.veagud.model.TriangleData data : triangles) {
 ////
 ////                if (stair.isRightDirection()) {
 ////                    data.baseElevation = 7 * heightStupen - data.baseElevation;
@@ -934,10 +941,10 @@ public class AcadScripCreate {
         int length = stair.getUpperStairsCount() * stair.getStupenGlubina() + stair.getPloshadka() + stair.getOtstup();
         double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getHeightStupen();
 
-        boolean hasNogi = stair.hasNogi;
+        boolean hasNogi = stair.isHasNogi();
         int chistovoiPol = 20;
         //упразднить, дававать зазор межмаршевого пространства
-        int shirinamarsha = stair.shirinamarsha;
+        int shirinamarsha = stair.getShirinamarsha();
         int otstup = stair.getOtstup();
 //изначально предполагаемая площадка
 
@@ -948,7 +955,7 @@ public class AcadScripCreate {
         double bestC = stair.getUpperStairsCount();
 
 
-        int lowerStairsCount = stair.lowerStairsCount;
+        int lowerStairsCount = stair.getLowerStairsCount();
 
         int upperStairsCount = (int) bestC;
 
@@ -966,9 +973,12 @@ public class AcadScripCreate {
 
         String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
 
-        Path scriptPath = Paths.get("C:\\Scripts acad", nameScr); // Укажите путь, куда вы хотите сохранить файл
+        Path scriptPath = Paths.get(saveScriptsPath, nameScr); // Укажите путь, куда вы хотите сохранить файл
 
         try (PrintWriter writer = new PrintWriter(scriptPath.toFile())) {
+            writer.println("_-VISUALSTYLES");
+            writer.println("_C");
+            writer.println("_C");
 
             createLayer(writer, "Prof.truba100x50");
             createLayer(writer, "Prof.truba40x20");
@@ -990,11 +1000,11 @@ public class AcadScripCreate {
 
             generatePlatform(writer, otstup, length, width,
                     ploshadkaShirina, visotaploshadki, shirinamarsha,
-                    heightStupen, stair.isRightDirection);
+                    heightStupen, stair.isRightDirection());
 //опорные ноги
             drawSupports(writer, otstup, length, width,
                     ploshadkaShirina, visotaploshadki,
-                    heightStupen, hasNogi, stair.isRightDirection);
+                    heightStupen, hasNogi, stair.isRightDirection());
 
 //Опорные пластины у основания
 
@@ -1206,7 +1216,7 @@ public class AcadScripCreate {
             }
 
 
-            int count = stair.isRightDirection ? upperStairsCount : lowerStairsCount;
+            int count = stair.isRightDirection() ? upperStairsCount : lowerStairsCount;
             for (int i = 0; i < count; i++) {
                 drawStep(writer, elev, pliney1, pliney2, pliney3, pliney4, pliney6,
                         pliney5, pery2, tochka1Zoom, tochka2Zoom, otstup, stupenGlubina,
@@ -1226,7 +1236,7 @@ public class AcadScripCreate {
 
 //Верхний марш
             vidSZadi(writer);
-            int count2 = stair.isRightDirection ? lowerStairsCount : upperStairsCount;
+            int count2 = stair.isRightDirection() ? lowerStairsCount : upperStairsCount;
             for (int i = 0; i < count2; i++) {
                 drawStep(writer, elevV, pliney1V, pliney2V, pliney3V, pliney4V, pliney6V,
                         pliney5V, pery2V, tochka1ZoomV, tochka2ZoomV, otstup, stupenGlubina,

@@ -1,11 +1,21 @@
-
+package com.veagud.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
+@Entity
+@Table(name = "proem")
 public class Proem {
+    @Column(name = "id")
+    @Id
+    Long id;
     private int width;
     private int length;
     private int height;
