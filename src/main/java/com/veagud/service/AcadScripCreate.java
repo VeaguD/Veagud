@@ -3,6 +3,7 @@ package com.veagud.service;
 import com.veagud.model.Proem;
 import com.veagud.model.Stair;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,13 +12,13 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+@Service
 public class AcadScripCreate {
 
     @Value("${save.scripts.path}")
-    private static String saveScriptsPath;
+    private String saveScriptsPath = "C:\\Scripts acad";
 
-    public static String createScriptsPodschetom(Proem proem, String pathSave) {
+    public String createScriptsPodschetom(Proem proem, String pathSave) {
 
         int width = proem.getWidth();
         int length = proem.getLength();
@@ -936,7 +937,7 @@ public class AcadScripCreate {
         writer.println(tochkaX + "," + tochkaY);
     }
 
-    public static String createScripts(Stair stair, String path) {
+    public String createScripts(Stair stair, String path) {
         int width = stair.getBetweenMarsh() + stair.getOtstup() * 2 + stair.getShirinamarsha() * 2;
         int length = stair.getUpperStairsCount() * stair.getStupenGlubina() + stair.getPloshadka() + stair.getOtstup();
         double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getHeightStupen();
@@ -948,7 +949,7 @@ public class AcadScripCreate {
         int otstup = stair.getOtstup();
 //изначально предполагаемая площадка
 
-        int ploshadkaShirina = stair.getPloshadka();
+        int ploshadkaShirina = stair.getPloshadka()+otstup;
         int stupenGlubina = stair.getStupenGlubina();
 
 
