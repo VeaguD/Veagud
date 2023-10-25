@@ -56,7 +56,7 @@ public class InputDialog extends JDialog {
         panel.add(createPanel("Диапазон глубины ступени до:", maxT = new JTextField("310", 10)));
         panel.add(createPanel("Ограничение расстояния на нижнем этаже:", lengthOtStenDoCraya = new JTextField("3500", 10)));
         panel.add(createPanel("Введите путь для сохранения", pathSaveAuto =
-                new JTextField("C:\\Users\\Loshadka\\IdeaProjects\\AutoStairDraw\\src\\main\\resources\\", 25)));
+                new JTextField("D:\\Final projects stair\\", 25)));
         panel.add(createCheckboxPanel("Нарисовать опорные ноги ?", hasNogiAuto = new JCheckBox()));
         return panel;
     }
@@ -74,7 +74,7 @@ public class InputDialog extends JDialog {
         panel.add(createPanel("Отступ:", otstupMono = new JTextField("20", 10)));
         panel.add(createPanel("Расстояние между маршей:", betweenMarsh = new JTextField("100", 10)));
         panel.add(createPanel("Введите путь для сохранения", pathSaveMono =
-                new JTextField("C:\\Users\\Loshadka\\IdeaProjects\\AutoStairDraw\\src\\main\\resources\\", 25)));
+                new JTextField("D:\\Final projects stair\\", 25)));
         panel.add(createCheckboxPanel("Нарисовать опорные ноги ?", hasNogiMono = new JCheckBox()));
         return panel;
     }

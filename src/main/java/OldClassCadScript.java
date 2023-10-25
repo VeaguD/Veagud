@@ -9,8 +9,8 @@ public class OldClassCadScript {
 
     public static void main(String[] args) {
 
-//        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe";
-        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\accoreconsole.exe";
+        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe";
+//        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\accoreconsole.exe";
 
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,10 +67,10 @@ public class OldClassCadScript {
 
         String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
 
-//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath);
-        String scrFilePath = "C:\\Users\\Loshadka\\Pictures\\" + nameScr;
-        String pathModule = "C:\\Users\\Loshadka\\AppData\\Roaming\\Autodesk\\ApplicationPlugins\\AVC_Pro.bundle\\Contents\\Windows\\AVC_Starter.dll";
-        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath, "/loadmodule", pathModule);
+        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath);
+//        String scrFilePath = "C:\\Scripts acad\\" + nameScr;
+////        String pathModule = "C:\\Users\\Loshadka\\AppData\\Roaming\\Autodesk\\ApplicationPlugins\\AVC_Pro.bundle\\Contents\\Windows\\AVC_Starter.dll";
+//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
 //       это для логировная в файл
         File outputFile = new File("output.txt");
         processBuilder.redirectOutput(outputFile);
