@@ -138,12 +138,12 @@ public class OldClassCadScript {
 
         String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
         //Когда это раскомментировано то рисуешь через сам автокад
-        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath, "/t", templatePath);
-
-        //Когда это раскомментировано то рисуешь через Консоль
-//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
-
+//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath, "/t", templatePath);
         String scrFilePath = scripSavePath + "\\" + nameScr;
+        //Когда это раскомментировано то рисуешь через Консоль
+        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
+
+
 //       это для логировная в файл
         File outputFile = new File("output.txt");
         processBuilder.redirectOutput(outputFile);
@@ -173,9 +173,8 @@ public class OldClassCadScript {
 
         //Когда это раскомментировано то рисуешь через сам автокад
 //        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath, "/t", templatePath);
-
-        //Когда это раскомментировано то рисуешь через Консоль
         String scrFilePath = scripSavePath + "\\" + nameScr;
+        //Когда это раскомментировано то рисуешь через Консоль
         ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
 
 //       это для логировная в файл
