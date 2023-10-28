@@ -1,23 +1,21 @@
 package com.veagud.controller;
 
 import com.veagud.exceptions.BusinessException;
-import com.veagud.model.Proem;
+import com.veagud.model.StaircaseOpening;
 import com.veagud.model.Stair;
-import com.veagud.repositories.StairRepositories;
+import com.veagud.repository.StairRepository;
 import com.veagud.service.OldClassCadScript;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Documented;
-
 @RestController
 public class controllerAcad {
     private OldClassCadScript oldClassCadScript;
-    private StairRepositories stairRepositories;
+    private StairRepository stairRepository;
 
-    public controllerAcad(OldClassCadScript oldClassCadScript, StairRepositories stairRepositories) {
+    public controllerAcad(OldClassCadScript oldClassCadScript, StairRepository stairRepository) {
         this.oldClassCadScript = oldClassCadScript;
-        this.stairRepositories = stairRepositories;
+        this.stairRepository = stairRepository;
     }
 
     @PostMapping("/goStair")
@@ -26,13 +24,13 @@ public class controllerAcad {
         return ResponseEntity.ok("Ты молодец!");
     }
     @PostMapping("/goStairWithProem")
-    ResponseEntity<String> drawStairWithProem(@RequestBody Proem proem) {
-        oldClassCadScript.drawStair(proem);
+    ResponseEntity<String> drawStairWithProem(@RequestBody StaircaseOpening staircaseOpening) {
+        oldClassCadScript.drawStair(staircaseOpening);
         return ResponseEntity.ok("Ты молодец!");
     }
 
     @GetMapping("/getStair/{stairId}")
     Stair drawStair(@PathVariable Long stairId) {
-        return stairRepositories.findById(stairId).orElseThrow(() -> new BusinessException("Такой лестницы нет!"));
+        return stairRepository.findById(stairId).orElseThrow(() -> new BusinessException("Такой лестницы нет!"));
     }
 }
