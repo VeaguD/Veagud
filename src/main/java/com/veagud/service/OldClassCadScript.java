@@ -1,27 +1,26 @@
 package com.veagud.service;
 
-import com.veagud.model.Proem;
+import com.veagud.model.StaircaseOpening;
 import com.veagud.model.Stair;
-import com.veagud.repositories.ProemRepositories;
-import com.veagud.repositories.StairRepositories;
+import com.veagud.repository.StaircaseOpeningRepository;
+import com.veagud.repository.StairRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Service
 public class OldClassCadScript {
-
-    private ProemRepositories proemRepositories;
-    private StairRepositories stairRepositories;
-
+    private StaircaseOpeningRepository staircaseOpeningRepository;
+    private StairRepository stairRepository;
     private AcadScripCreate acadScripCreate;
 
-    public OldClassCadScript(ProemRepositories proemRepositories, StairRepositories stairRepositories, AcadScripCreate acadScripCreate) {
-        this.proemRepositories = proemRepositories;
-        this.stairRepositories = stairRepositories;
+    public OldClassCadScript(StaircaseOpeningRepository staircaseOpeningRepository, StairRepository stairRepository, AcadScripCreate acadScripCreate) {
+        this.staircaseOpeningRepository = staircaseOpeningRepository;
+        this.stairRepository = stairRepository;
         this.acadScripCreate = acadScripCreate;
     }
 
@@ -36,69 +35,59 @@ public class OldClassCadScript {
 
     public void drawStair() {
 
-//        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\accoreconsole.exe";
+        String autocadPath = "C:\\Program Files\\Autodesk\\AutoCAD 2022\\accoreconsole.exe";
 
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(400, 400);
-//        frame.setVisible(false);
-        Proem proem = new Proem();
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setVisible(false);
+        StaircaseOpening staircaseOpening = new StaircaseOpening();
         Stair stair = new Stair();
-//        InputDialog dialog = new InputDialog(frame);
-        String scriptPath = "Hi";
-        stair.setLowerStairsCount(10);
-        stair.setHasNogi(true);
-        stair.setRightDirection(true);
-        stair.setOtstup(20);
-        stair.setPloshadka(900);
-        stair.setUpperStairsCount(10);
-        stair.setStupenGlubina(250);
-        stair.setHeightStupen(150);
-        stair.setBetweenMarsh(100);
-        stair.setShirinamarsha(900);
 
-        scriptPath = acadScripCreate.createScripts(stair, "D:\\Final projects stair\\");
-//        if (dialog.isSubmitted()) {
-//
-//            if (!dialog.isSelectedTab()) {
-//                proem.setWidth(Integer.parseInt(dialog.getWidthText()));
-//                proem.setLength(Integer.parseInt(dialog.getLengthText()));
-//                proem.setHeight(Integer.parseInt(dialog.getHeightText()));
-//                proem.setChistovoiPol(Integer.parseInt(dialog.getChistovoiPolText()));
-//                proem.setShirinamarsha(Integer.parseInt(dialog.getShirinamarshaText()));
-//                proem.setOtstup(Integer.parseInt(dialog.getOtstupValue()));
-//                //разберись с площадкой, не берутся данные из панели, а берутся свои
-//                proem.setPloshadkaShirinaTeor(Integer.parseInt(dialog.getShirinaPloshadki()));
-//                proem.setMinVValue(Double.parseDouble(dialog.getMinVValueText()));
-//                proem.setMaxVValue(Double.parseDouble(dialog.getMaxVValueText()));
-//                proem.setMinT(Integer.parseInt(dialog.getMinTText()));
-//                proem.setMaxT(Integer.parseInt(dialog.getMaxTText()));
-//                proem.setLengthOtStenDoCraya(Integer.parseInt(dialog.getLengthOtStenDoCrayaText()));
-//                proem.setHasNogi(dialog.isSelectedValue());
-//                if (dialog.getDirectionSelector().equals("Левый подъём")) {
-//                    proem.setRightDirection(false);
-//                }
-//                System.out.println(dialog.getDirectionSelector());
-//                scriptPath = AcadScripCreate.createScriptsPodschetom(proem, dialog.getPathSaveAuto());
-//            } else {
-//                stair.setHeightStupen(Double.parseDouble(dialog.getHeightStupenText()));
-//                stair.setLowerStairsCount(Integer.parseInt(dialog.getLowerStairsCountText()));
-//                stair.setUpperStairsCount(Integer.parseInt(dialog.getUpperStairsCountText()));
-//                stair.setOtstup(Integer.parseInt(dialog.getOtstupValue()));
-//                stair.setPloshadka(Integer.parseInt(dialog.getShirinaPloshadki()));
-//                stair.setStupenGlubina(Integer.parseInt(dialog.getStupenGlubinaText()));
-//                stair.setHasNogi(dialog.isSelectedValue());
-//                stair.setCountZabStupen(dialog.getSelectorCountZabStup());
-//                if (dialog.getDirectionSelector().equals("Левый подъём")) {
-//                    stair.setRightDirection(false);
-//                }
-//                System.out.println(dialog.getDirectionSelector());
-//                scriptPath = AcadScripCreate.createScripts(stair, dialog.getPathSaveMono());
-//
-//            }
-//        } else {
-//            System.exit(0);
-//        }
+        InputDialog dialog = new InputDialog(frame);
+        String scriptPath = "Hi";
+
+        scriptPath = acadScripCreate.createScripts(stair, finalPath);
+        if (dialog.isSubmitted()) {
+
+            if (!dialog.isSelectedTab()) {
+                staircaseOpening.setWidth(Integer.parseInt(dialog.getWidthText()));
+                staircaseOpening.setLength(Integer.parseInt(dialog.getLengthText()));
+                staircaseOpening.setHeight(Integer.parseInt(dialog.getHeightText()));
+                staircaseOpening.setFinishedFloorThickness(Integer.parseInt(dialog.getChistovoiPolText()));
+                staircaseOpening.setFlightWidth(Integer.parseInt(dialog.getShirinamarshaText()));
+                staircaseOpening.setIndent(Integer.parseInt(dialog.getOtstupValue()));
+                //разберись с площадкой, не берутся данные из панели, а берутся свои
+                staircaseOpening.setTheoreticalPlatformWidth(Integer.parseInt(dialog.getShirinaPloshadki()));
+                staircaseOpening.setMinStepHeight(Double.parseDouble(dialog.getMinVValueText()));
+                staircaseOpening.setMaxStepHeight(Double.parseDouble(dialog.getMaxVValueText()));
+                staircaseOpening.setMinStepDepth(Integer.parseInt(dialog.getMinTText()));
+                staircaseOpening.setMaxStepDepth(Integer.parseInt(dialog.getMaxTText()));
+                staircaseOpening.setDistanceFromWallToStair(Integer.parseInt(dialog.getLengthOtStenDoCrayaText()));
+                staircaseOpening.setHasSupportLegs(dialog.isSelectedValue());
+                if (dialog.getDirectionSelector().equals("Левый подъём")) {
+                    staircaseOpening.setDirectionRight(false);
+                }
+                System.out.println(dialog.getDirectionSelector());
+                scriptPath = acadScripCreate.createScriptsPodschetom(staircaseOpening, dialog.getPathSaveAuto());
+            } else {
+                stair.setStepHeight(Double.parseDouble(dialog.getHeightStupenText()));
+                stair.setLowerStairsCount(Integer.parseInt(dialog.getLowerStairsCountText()));
+                stair.setUpperStairsCount(Integer.parseInt(dialog.getUpperStairsCountText()));
+                stair.setIndent(Integer.parseInt(dialog.getOtstupValue()));
+                stair.setPlatform(Integer.parseInt(dialog.getShirinaPloshadki()));
+                stair.setStepDepth(Integer.parseInt(dialog.getStupenGlubinaText()));
+                stair.setSupportLegs(dialog.isSelectedValue());
+                stair.setWinderStepsCount(dialog.getSelectorCountZabStup());
+                if (dialog.getDirectionSelector().equals("Левый подъём")) {
+                    stair.setDirectionRight(false);
+                }
+                System.out.println(dialog.getDirectionSelector());
+                scriptPath = acadScripCreate.createScripts(stair, dialog.getPathSaveMono());
+            }
+        } else {
+            System.exit(0);
+        }
 
 
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
@@ -132,7 +121,7 @@ public class OldClassCadScript {
 
     public void drawStair(Stair stair) {
         String scriptPath = "Hi";
-        stairRepositories.save(stair);
+        stairRepository.save(stair);
         scriptPath = acadScripCreate.createScripts(stair, finalPath);
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
@@ -163,10 +152,10 @@ public class OldClassCadScript {
         }
     }
 
-    public void drawStair(Proem proem) {
+    public void drawStair(StaircaseOpening staircaseOpening) {
         String scriptPath = "Hi";
-        proemRepositories.save(proem);
-        scriptPath = acadScripCreate.createScriptsPodschetom(proem, finalPath);
+        staircaseOpeningRepository.save(staircaseOpening);
+        scriptPath = acadScripCreate.createScriptsPodschetom(staircaseOpening, finalPath);
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
         String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
