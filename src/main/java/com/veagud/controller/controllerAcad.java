@@ -23,6 +23,10 @@ public class controllerAcad {
         oldClassCadScript.drawStair(stair);
         return ResponseEntity.ok("Ты молодец!");
     }
+    @GetMapping("/successLog")
+    ResponseEntity<String> successLog() {
+        return ResponseEntity.ok("Ты авторизированный/аутентифицированный молодец!");
+    }
     @PostMapping("/goStairWithProem")
     ResponseEntity<String> drawStairWithProem(@RequestBody StaircaseOpening staircaseOpening) {
         oldClassCadScript.drawStair(staircaseOpening);
