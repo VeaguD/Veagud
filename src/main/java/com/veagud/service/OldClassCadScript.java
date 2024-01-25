@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class OldClassCadScript {
@@ -127,15 +128,16 @@ public class OldClassCadScript {
 
         String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
         //Когда это раскомментировано то рисуешь через сам автокад
-//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath, "/t", templatePath);
+        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/b", scriptPath);
         String scrFilePath = scripSavePath + "\\" + nameScr;
         //Когда это раскомментировано то рисуешь через Консоль
-        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
+//        ProcessBuilder processBuilder = new ProcessBuilder(autocadPath, "/s", scrFilePath);
 
 
 //       это для логировная в файл
         File outputFile = new File("output.txt");
         processBuilder.redirectOutput(outputFile);
+
         try {
 
             Process process = processBuilder.start();

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Страница управления</title>
+</head>
+<body>
+<h2>Управление лестницей</h2>
+
+<!-- Кнопка для перехода к архиву -->
+<a th:href="@{/archive/{userId}(userId=${userId})}">
+  <button type="button">В архив</button>
+</a>
+
+<!-- Кнопка для перехода к форме нарисовать лестницу -->
+<a href="/form">
+  <button type="button">Нарисовать лестницу</button>
+</a>
+</body>
+</html>

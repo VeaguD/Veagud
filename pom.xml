@@ -77,6 +77,11 @@
       <version>1.6.9</version> <!-- используйте последнюю версию -->
     </dependency>
 
+      <dependency>
+        <groupId>org.springframework.kafka</groupId>
+        <artifactId>spring-kafka</artifactId>
+      </dependency>
+
 
   </dependencies>
 

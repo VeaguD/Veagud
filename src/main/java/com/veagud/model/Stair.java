@@ -3,6 +3,7 @@ package com.veagud.model;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -41,7 +42,7 @@ public class Stair {
      * Наличие опорных ног у лестницы.
      * True - если опорные ноги есть, False - если нет.
      */
-    private boolean supportLegs = true;
+    private boolean supportLegs = false;
     /**
      * Ширина марша лестницы в миллиметрах
      */
@@ -51,6 +52,10 @@ public class Stair {
      */
     private int betweenFlights = 100;
     /**
+     * Чистовой пол в миллиметрах
+     */
+    private int cleanFloor;
+    /**
      * Количество забежных ступеней
      */
     private int winderStepsCount;
@@ -59,5 +64,19 @@ public class Stair {
      * True - если подъем справа, False - если слева.
      */
     private boolean isDirectionRight = true;
+
+    /**
+     * Техническое имя файла
+     */
+    private String fileName;
+
+    /**
+     * Айди автора
+     */
+    private Long creatorId;
+    /**
+     * Айди автора
+     */
+    private LocalDateTime created;
 
 }

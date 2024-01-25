@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат</title>
+    <style>
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<p>Данные получены, подождите 80 секунд пока гномики в коробке нарисуют лестницу</p>
+
+<div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+</div>
+
+<a th:href="@{${file1Url}}" id="link1" class="timer-link" style="pointer-events: none; opacity: 0.5;">Скачать ДВГ Лестницу</a><br>
+<a th:href="@{${file2Url}}" id="link2" class="timer-link" style="pointer-events: none; opacity: 0.5;">Скачать ПДФ Лестницу</a>
+
+<!-- Кнопка для возврата к старту -->
+<a href="/successLog">
+    <button type="button">Вернуться к старту</button>
+</a>
+
+<script>
+    window.onload = function() {
+        var start = null;
+        var duration = 80000; // 60 секунд
+        var links = document.querySelectorAll('.timer-link');
+        var bar = document.getElementById("myBar");
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = timestamp - start;
+            var percent = Math.min(progress / duration * 100, 100);
+            bar.style.width = percent + '%';
+
+            if (progress < duration) {
+                requestAnimationFrame(step);
+            } else {
+                activateLinks(); // Активируем ссылки после завершения анимации
+            }
+        }
+
+        function activateLinks() {
+            links.forEach(function(link) {
+                link.style.pointerEvents = 'auto';
+                link.style.opacity = '1';
+            });
+        }
+
+        requestAnimationFrame(step);
+    };
+
+</script>
+</body>
+</html>

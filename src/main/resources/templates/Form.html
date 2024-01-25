@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Параметры конструкции</title>
+</head>
+<body>
+<h2>Введите параметры</h2>
+<form action="/goStairWithView" method="POST">
+  <label for="platform">Площадка:</label>
+  <input type="number" id="platform" name="platform" value="1000"><br><br>
+
+  <label for="indent">Отступ от стен:</label>
+  <input type="number" id="indent" name="indent" value="20"><br><br>
+
+  <label for="lowerStairsCount">Ступеней в нижнем марше:</label>
+  <input type="number" id="lowerStairsCount" name="lowerStairsCount" value="7"><br><br>
+
+  <label for="upperStairsCount">Ступеней в верхнем марше:</label>
+  <input type="number" id="upperStairsCount" name="upperStairsCount" value="8"><br><br>
+
+  <label for="stepHeight">Высота ступени:</label>
+  <input type="number" id="stepHeight" name="stepHeight" value="150"><br><br>
+
+  <label for="stepDepth">Глубина ступени:</label>
+  <input type="number" id="stepDepth" name="stepDepth" value="300"><br><br>
+
+  <label for="flightWidth">Чистовая ширина марша:</label>
+  <input type="number" id="flightWidth" name="flightWidth" value="1000"><br><br>
+
+  <label for="betweenFlights">Межмаршевое расстояние:</label>
+  <input type="number" id="betweenFlights" name="betweenFlights" value="100"><br><br>
+
+  <label for="cleanFloor">Чистовой пол:</label>
+  <input type="number" id="cleanFloor" name="cleanFloor" value="100"><br><br>
+
+  <label for="winderStepsCount">Количество забежных ступней:</label>
+  <input type="number" id="winderStepsCount" name="winderStepsCount" value="0"><br><br>
+
+  <label for="supportLegs">Нужны опорные ноги ?</label>
+  <input type="checkbox" id="supportLegs" name="supportLegs" value="true" checked><br><br>
+
+  <label for="directionRight">Лестница с правым подъемом ?</label>
+  <input type="checkbox" id="directionRight" name="directionRight" value="true" checked><br><br>
+
+
+  <input type="submit" value="Отправить">
+  <!-- Кнопка для перехода к Вернуться к старту -->
+  <a href="/successLog">
+    <button type="button">Вернуться к старту</button>
+  </a>
+</form>
+</body>
+</html>
