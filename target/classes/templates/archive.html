@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Архив лестниц</title>
+</head>
+<body>
+<h2>Архив лестниц</h2>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Глубина ступени</th>
+    <th>Межмаршевое расстояние</th>
+    <th>Отступ от стены</th>
+    <th>Лестница с правым забегом?</th>
+    <th>Ступени в нижнем марше</th>
+    <th>Ступени в верхнем марше</th>
+    <th>Ширина площадки</th>
+    <th>Чистовая ширина марша</th>
+    <th>Высота ступени</th>
+    <th>С опорными ногами ?</th>
+    <th>Чистовой пол</th>
+    <th>Кол-во забежных ступеней</th>
+    <th>Дата создания</th>
+    <th>Ссылка на скачивание двг</th>
+    <th>Ссылка на скачивание пдф</th>
+    <th>Нарисовать такую же ?</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="stair : ${stairs}">
+    <td th:text="${stair.getId()}"></td>
+    <td th:text="${stair.getStepDepth()}"></td>
+    <td th:text="${stair.getBetweenFlights()}"></td>
+    <td th:text="${stair.getIndent()}"></td>
+    <td th:text="${stair.isDirectionRight() ? 'Да' : 'Нет'}"></td>
+    <td th:text="${stair.getLowerStairsCount()}"></td>
+    <td th:text="${stair.getUpperStairsCount()}"></td>
+    <td th:text="${stair.getPlatform()}"></td>
+    <td th:text="${stair.getFlightWidth()}"></td>
+    <td th:text="${stair.getStepHeight()}"></td>
+    <td th:text="${stair.isSupportLegs() ? 'Да' : 'Нет'}"></td>
+    <td th:text="${stair.getCleanFloor()}"></td>
+    <td th:text="${stair.getWinderStepsCount()}"></td>
+    <td th:text="${stair.getCreated()}"></td>
+    <td>
+      <a th:href="@{/files/{filename}(filename=${stair.getFileName()})}"
+         th:text="${stair.getFileName}">Скачать файл ДВГ</a>
+    </td>
+    <td>
+      <a th:href="@{/filespdf/{filename}(filename=${stair.fileName})}"
+         th:text="${stair.fileName}">Скачать файл ПДФ</a>
+    </td>
+    <td>
+      <a th:href="@{/copy/{stairId}(stairId=${stair.id})}"
+         th:text="${stair.id}">Нарисовать повторно</a>
+    </td>
+  </tr>
+  <!-- Кнопка для перехода к Вернуться к старту -->
+  <a href="/successLog">
+    <button type="button">Вернуться к старту</button>
+  </a>
+  </tbody>
+</table>
+</body>
+</html>

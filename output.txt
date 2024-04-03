@@ -1,0 +1,148 @@
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+AcadFreeScanLinesCallback
+HCRasterized::FreeScanLines
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Version compatibility file SSOVersionCompatibility.config not found
+Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
+Client plugin module not found: 
+AdSSOServices.dll module loaded (Version: 12.3.3.1803 Config: x64-Release File: C:/Program Files/Autodesk/AutoCAD 2022/AdSSOServices.dll)
+Searching for client config file SSOClient.config in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Found client config file at C:/Program Files/Autodesk/AutoCAD 2022/SSOClient.config
+Loading client config file C:/Program Files/Autodesk/AutoCAD 2022/SSOClient.config
+Unable to get AdSSO path from registry, failed with error: 2
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Searching for version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Searching for compatible client plugin version for AdSSOServices version 12.3.3.1803 in version compatibility file SSOVersionCompatibility.config
+Version compatibility file SSOVersionCompatibility.config not found
+Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
+Client plugin module not found: 
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Version compatibility file SSOVersionCompatibility.config not found
+Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
+Client plugin module not found: 
+AdSSOServices.dll module loaded (Version: 12.3.3.1803 Config: x64-Release File: C:/Program Files/Autodesk/AutoCAD 2022/AdSSOServices.dll)
+Searching for client config file SSOClient.config in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Found client config file at C:/Program Files/Autodesk/AutoCAD 2022/SSOClient.config
+Loading client config file C:/Program Files/Autodesk/AutoCAD 2022/SSOClient.config
+Unable to get AdSSO path from registry, failed with error: 2
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Searching for version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Searching for SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find SSO server app AdSSO.exe in the following paths:
+C:/Program Files/Autodesk/AutoCAD 2022
+Failed to find version compatibility file SSOVersionCompatibility.config in the following paths:
+%SSOServerAppPath%
+Searching for compatible client plugin version for AdSSOServices version 12.3.3.1803 in version compatibility file SSOVersionCompatibility.config
+Version compatibility file SSOVersionCompatibility.config not found
+Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
+Client plugin module not found: 

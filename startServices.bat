@@ -1,0 +1,9 @@
+@echo off
+echo Starting ZooKeeper...
+start cmd /k "C:\Users\Loshadka\Downloads\apache-zookeeper-3.9.1-bin\apache-zookeeper-3.9.1-bin\bin\zkServer.cmd"
+
+echo Waiting for 30 seconds...
+timeout /t 30 /nobreak
+
+echo Starting Kafka...
+start cmd /k "C:\kafka_2.12-3.6.1\bin\windows\kafka-server-start.bat C:\kafka_2.12-3.6.1\config\server.properties"
