@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class StairController {
-    private StairRepository stairRepository;
+    private final StairRepository stairRepository;
 
-    private StairService stairService;
+    private final StairService stairService;
 
     public StairController(StairRepository stairRepository, StairService stairService) {
         this.stairRepository = stairRepository;

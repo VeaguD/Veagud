@@ -24,14 +24,14 @@ public class AcadController {
     private UserService userService;
     private StairService stairService;
 
-    private KafkaProducerService kafkaProducerService;
+//    private KafkaProducerService kafkaProducerService;
 
-    public AcadController(OldClassCadScript oldClassCadScript, StairRepository stairRepository, UserService userService, StairService stairService, KafkaProducerService kafkaProducerService) {
+    public AcadController(OldClassCadScript oldClassCadScript, StairRepository stairRepository, UserService userService, StairService stairService) {
         this.oldClassCadScript = oldClassCadScript;
         this.stairRepository = stairRepository;
         this.userService = userService;
         this.stairService = stairService;
-        this.kafkaProducerService = kafkaProducerService;
+//        this.kafkaProducerService = kafkaProducerService;
     }
 
     @PostMapping("/goStair")
@@ -82,8 +82,8 @@ public class AcadController {
         stair.setFileName(name);
         stair.setCreatorId(user.getId());
         stair.setCreated(LocalDateTime.now());
-        kafkaProducerService.sendMessage("myTopic", stair);
-
+//        kafkaProducerService.sendMessage("myTopic", stair);
+        oldClassCadScript.drawStair(stair);
         return modelAndView;
     }
 

@@ -4,6 +4,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -18,5 +19,7 @@ public class KafkaTopicCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        int[] arr = {1, 2, 3, 4, 5, 4, 3, 2, 1};
+        Arrays.stream(arr).distinct().findFirst();
     }
 }

@@ -1,6 +1,7 @@
 package com.veagud;
 
-import com.veagud.service.OldClassCadScript;
+import com.veagud.configuration.ConfigurationLoader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -10,6 +11,24 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class Application {
 
     public static void main(String[] args) {
+        ConfigurationLoader configurationLoader = new ConfigurationLoader();
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
         SpringApplication.run(Application.class, args);
     }
 }

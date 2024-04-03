@@ -1,5 +1,6 @@
 package com.veagud.service;
 
+import com.veagud.configuration.ConfigurationLoader;
 import com.veagud.model.Stair;
 import com.veagud.model.StaircaseOpening;
 import org.springframework.beans.factory.annotation.Value;
@@ -709,41 +710,50 @@ public class AcadScripCreate {
         writer.println(40);
     }
 
+
     //это тренировочный метод для того что бы понять как рисовать забежные ступени createScripts1 метода убери 1 и будет все ок
-//    public static String createScripts(com.veagud.model.Stair stair, String path) {
-//        int width = stair.getBetweenMarsh() + stair.getOtstup() * 2 + stair.getShirinamarsha() * 2;
-//        int length = stair.getUpperStairsCount() * stair.getStupenGlubina() + stair.getPloshadka() + stair.getOtstup();
-//        double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getHeightStupen();
-//
-//        boolean hasNogi = stair.hasNogi;
-//        int chistovoiPol = 20;
-//        //упразднить, дававать зазор межмаршевого пространства
-//        int shirinamarsha = stair.shirinamarsha;
-//        int otstup = stair.getOtstup();
-////изначально предполагаемая площадка
-//
-//        int ploshadkaShirina = stair.getPloshadka();
-//        int stupenGlubina = stair.getStupenGlubina();
-//
-//        double bestC = stair.getUpperStairsCount();
-//
-//        int lowerStairsCount = stair.lowerStairsCount;
-//        int upperStairsCount = (int) bestC;
-//        double heightStupen = stair.getHeightStupen();
-//        double visotaploshadki = ((lowerStairsCount + 1) * heightStupen) - 40;
-//        int allCountStupen = upperStairsCount + lowerStairsCount;
-//        int allUp = upperStairsCount + lowerStairsCount + 2;
-//
-//        DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-//
-//        String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
-//
-//        Path scriptPath = Paths.get("C:\\Scripts acad", nameScr); // Укажите путь, куда вы хотите сохранить файл
-//        try (PrintWriter writer = new PrintWriter(scriptPath.toFile())) {
-//            System.out.println(stair.getCountZabStupen());
-////Отключение привязки
-//            disableSnap(writer);
-////новый код
+    public static String createScripts1(Stair stair, String path) {
+
+        int width = stair.getBetweenFlights() + stair.getIndent() * 2 + stair.getFlightWidth() * 2;
+        int length = stair.getUpperStairsCount() * stair.getStepDepth() + stair.getPlatform() + stair.getIndent();
+        double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getStepHeight();
+
+        boolean hasNogi = stair.isSupportLegs();
+        int chistovoiPol = 20;
+        //упразднить, дававать зазор межмаршевого пространства
+        int shirinamarsha = stair.getFlightWidth();
+        int otstup = stair.getIndent();
+//изначально предполагаемая площадка
+
+        int ploshadkaShirina = stair.getPlatform();
+        int stupenGlubina = stair.getStepDepth();
+
+        double bestC = stair.getUpperStairsCount();
+
+        int lowerStairsCount = stair.getLowerStairsCount();
+        int upperStairsCount = (int) bestC;
+        double heightStupen = stair.getStepHeight();
+        double visotaploshadki = ((lowerStairsCount + 1) * heightStupen) - 40;
+        int allCountStupen = upperStairsCount + lowerStairsCount;
+        int allUp = upperStairsCount + lowerStairsCount + 2;
+
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+
+        String nameScr = LocalDateTime.now().format(form) + "Scr.scr";
+
+        Path scriptPath = Paths.get("C:\\Scripts acad", nameScr); // Укажите путь, куда вы хотите сохранить файл
+        try (PrintWriter writer = new PrintWriter(scriptPath.toFile())) {
+            System.out.println(stair.getWinderStepsCount());
+//Отключение привязки
+            disableSnap(writer);
+            //Новые попытки уже с лиспами и блоками
+
+            insertK3K(writer, "0", "0", "0", "555", "333", "222");
+            insertK3S(writer, "0", "0", "0", "555", "333", "222");
+
+
+
+//новый код
 //            writer.println("_LWEIGHT");
 //            writer.println("0.3");
 //            writer.println("_COLOR");
@@ -757,151 +767,170 @@ public class AcadScripCreate {
 //            writer.println("_RECTANGLE");
 //            writer.println(otstup + "," + graniZabStupY);
 //            writer.println(graniZabStupX + "," + graniZabStupY2);
-//
-////пока уберём это для того что бы сохранить, это работает для рисования треугольников
-////            double tochkaNachalaX = width / 2;
-////            double tochkaNachalaY = length - ploshadkaShirina;
-////
-////            double kat11 = ploshadkaShirina * 0.673;
-////            double kat21 = (width / 2) - otstup;
-////            double kat12 = ploshadkaShirina - kat11;
-////            double kat22 = (width / 2) * 0.5;
-////
-////            double XTreug1 = tochkaNachalaX - kat21;
-////            double YTreug1 = tochkaNachalaY + kat11;
-////            double XTreug2 = XTreug1 + kat22;
-////            double YTreug2 = length - otstup;
-////            double XTreug3 = width / 2;
-////
-////            double XTreug1Right = width - XTreug1;
-////            double XTreug2Right = width - XTreug2;
-////            double XTreug3Right = width - XTreug3;
-////
-////            List<com.veagud.model.winderSteps.TriangleData> triangles = new ArrayList<>();
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, tochkaNachalaY, XTreug1, YTreug1, heightStupen));
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, YTreug1, XTreug1, YTreug2, XTreug2, YTreug2, heightStupen * 2));
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug2, YTreug2, XTreug3, YTreug2, heightStupen * 3));
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, tochkaNachalaY, XTreug1Right, YTreug1, heightStupen * 6));
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, YTreug1, XTreug1Right, YTreug2, XTreug2Right, YTreug2, heightStupen * 5));
-////            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug2Right, YTreug2, XTreug3Right, YTreug2, heightStupen * 4));
-////
-////            for (com.veagud.model.winderSteps.TriangleData data : triangles) {
-////
-////                if (stair.isRightDirection()) {
-////                    data.baseElevation = 7 * heightStupen - data.baseElevation;
-////                }
-////
-////                if (data.isFourPoints) {
-////                    drawTriangle4(data.x1, data.y1, data.x2, data.y2, data.x3, data.y3, data.x4,
-////                            data.y4, data.baseElevation, writer);
-////                } else {
-////                    drawTriangle3(data.x1, data.y1, data.x2, data.y2, data.x3, data.y3,
-////                            data.baseElevation,  writer);
-////                }
-////            }
-//
-//
-//            //это для проф труб
+
+//пока уберём это для того что бы сохранить, это работает для рисования треугольников
 //            double tochkaNachalaX = width / 2;
 //            double tochkaNachalaY = length - ploshadkaShirina;
 //
-//            //нарисовали первый треугольник слева
-//            //катет ступени 1
 //            double kat11 = ploshadkaShirina * 0.673;
 //            double kat21 = (width / 2) - otstup;
+//            double kat12 = ploshadkaShirina - kat11;
+//            double kat22 = (width / 2) * 0.5;
 //
 //            double XTreug1 = tochkaNachalaX - kat21;
 //            double YTreug1 = tochkaNachalaY + kat11;
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen);
-//            PL(writer, tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug1 + "," + tochkaNachalaY);
-//            writer.println(XTreug1 + "," + YTreug1);
-//            writer.println("_Close");
-//
-//            //нарисовали второй треугольник слева
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen + heightStupen);
-//            double kat12 = ploshadkaShirina - kat11;
-//            double kat22 = (width / 2) * 0.5;
-//            double YTreug2 = length - otstup;
 //            double XTreug2 = XTreug1 + kat22;
-//            PL(writer, tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug1 + "," + YTreug1);
-//            writer.println(XTreug1 + "," + YTreug2);
-//            writer.println(XTreug2 + "," + YTreug2);
-//            writer.println("_Close");
-//
-//            //нарисовали третий треугольник слева
+//            double YTreug2 = length - otstup;
 //            double XTreug3 = width / 2;
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen * 3);
-//            PL(writer, tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug2 + "," + YTreug2);
-//            writer.println(XTreug3 + "," + YTreug2);
-//            writer.println("_Close");
 //
-//            //нарисовали первый треугольник справа
 //            double XTreug1Right = width - XTreug1;
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen * 6);
-//            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug1Right + "," + tochkaNachalaY);
-//            writer.println(XTreug1Right + "," + YTreug1);
-//            writer.println("_Close");
-//
-////нарисовали второй треугольник справа
 //            double XTreug2Right = width - XTreug2;
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen * 5);
-//            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug1Right + "," + YTreug1);
-//            writer.println(XTreug1Right + "," + YTreug2);
-//            writer.println(XTreug2Right + "," + YTreug2);
-//            writer.println("_Close");
-//
-////нарисовали третий треугольник справа
-//
 //            double XTreug3Right = width - XTreug3;
+//
+//            List<com.veagud.model.winderSteps.TriangleData> triangles = new ArrayList<>();
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, tochkaNachalaY, XTreug1, YTreug1, heightStupen));
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug1, YTreug1, XTreug1, YTreug2, XTreug2, YTreug2, heightStupen * 2));
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(tochkaNachalaX, tochkaNachalaY, XTreug2, YTreug2, XTreug3, YTreug2, heightStupen * 3));
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, tochkaNachalaY, XTreug1Right, YTreug1, heightStupen * 6));
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug1Right, YTreug1, XTreug1Right, YTreug2, XTreug2Right, YTreug2, heightStupen * 5));
+//            triangles.add(new com.veagud.model.winderSteps.TriangleData(width - tochkaNachalaX, tochkaNachalaY, XTreug2Right, YTreug2, XTreug3Right, YTreug2, heightStupen * 4));
+//
+//            for (com.veagud.model.winderSteps.TriangleData data : triangles) {
+//
+//                if (stair.isRightDirection()) {
+//                    data.baseElevation = 7 * heightStupen - data.baseElevation;
+//                }
+//
+//                if (data.isFourPoints) {
+//                    drawTriangle4(data.x1, data.y1, data.x2, data.y2, data.x3, data.y3, data.x4,
+//                            data.y4, data.baseElevation, writer);
+//                } else {
+//                    drawTriangle3(data.x1, data.y1, data.x2, data.y2, data.x3, data.y3,
+//                            data.baseElevation,  writer);
+//                }
+//            }
+
+
+            //это для проф труб
+            double tochkaNachalaX = width / 2;
+            double tochkaNachalaY = length - ploshadkaShirina;
+
+            //нарисовали первый треугольник слева
+            //катет ступени 1
+            double kat11 = ploshadkaShirina * 0.673;
+            double kat21 = (width / 2) - otstup;
+
+            double XTreug1 = tochkaNachalaX - kat21;
+            double YTreug1 = tochkaNachalaY + kat11;
+            writer.println("_ELEVATION");
+            writer.println(heightStupen);
+            PL(writer, tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug1 + "," + tochkaNachalaY);
+            writer.println(XTreug1 + "," + YTreug1);
+            writer.println("_Close");
+
+            //нарисовали второй треугольник слева
+            writer.println("_ELEVATION");
+            writer.println(heightStupen + heightStupen);
+            double kat12 = ploshadkaShirina - kat11;
+            double kat22 = (width / 2) * 0.5;
+            double YTreug2 = length - otstup;
+            double XTreug2 = XTreug1 + kat22;
+            PL(writer, tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug1 + "," + YTreug1);
+            writer.println(XTreug1 + "," + YTreug2);
+            writer.println(XTreug2 + "," + YTreug2);
+            writer.println("_Close");
+
+            //нарисовали третий треугольник слева
+            double XTreug3 = width / 2;
+            writer.println("_ELEVATION");
+            writer.println(heightStupen * 3);
+            PL(writer, tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug2 + "," + YTreug2);
+            writer.println(XTreug3 + "," + YTreug2);
+            writer.println("_Close");
+
+            //нарисовали первый треугольник справа
+            double XTreug1Right = width - XTreug1;
+            writer.println("_ELEVATION");
+            writer.println(heightStupen * 6);
+            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug1Right + "," + tochkaNachalaY);
+            writer.println(XTreug1Right + "," + YTreug1);
+            writer.println("_Close");
+
+//нарисовали второй треугольник справа
+            double XTreug2Right = width - XTreug2;
+            writer.println("_ELEVATION");
+            writer.println(heightStupen * 5);
+            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug1Right + "," + YTreug1);
+            writer.println(XTreug1Right + "," + YTreug2);
+            writer.println(XTreug2Right + "," + YTreug2);
+            writer.println("_Close");
+
+//нарисовали третий треугольник справа
+
+            double XTreug3Right = width - XTreug3;
+            writer.println("_ELEVATION");
+            writer.println(heightStupen * 4);
+            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
+            writer.println(XTreug2Right + "," + YTreug2);
+            writer.println(XTreug3Right + "," + YTreug2);
+            writer.println("_Close");
+
+            teleportUCS(writer, tochkaNachalaX, tochkaNachalaY);
+            leftDirectionScroll(writer, -30);
+            writer.println("_ELEVATION");
+            writer.println(heightStupen);
+            for (int i = 0; i < 11; i++) {
+                drowZabPer(writer, i, (int) heightStupen);
+            }
+            //конец рисования проф труб
+
+//            leftDirectionScroll(writer, -30);
+//
 //            writer.println("_ELEVATION");
 //            writer.println(heightStupen * 4);
-//            PL(writer, width - tochkaNachalaX, tochkaNachalaY);
-//            writer.println(XTreug2Right + "," + YTreug2);
-//            writer.println(XTreug3Right + "," + YTreug2);
-//            writer.println("_Close");
-//
-//            teleportUCS(writer, tochkaNachalaX, tochkaNachalaY);
-//            leftDirectionScroll(writer, -30);
-//            writer.println("_ELEVATION");
-//            writer.println(heightStupen);
-//            for (int i = 0; i < 11; i++) {
-//                drowZabPer(writer, i, (int) heightStupen);
-//            }
-//            //конец рисования проф труб
-//
-////            leftDirectionScroll(writer, -30);
-////
-////            writer.println("_ELEVATION");
-////            writer.println(heightStupen * 4);
-////            writer.println("_BOX");
-////            writer.println(0 + "," + 0);
-////            double perX2 = -2000;
-////            double pery2 = -40;
-////            writer.println(perX2 + "," + pery2);
-////            writer.println(20);
-//
-//
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-//            String name = LocalDateTime.now().format(formatter) + "test.dwg";
-//            String pathSaveName = path + name;
-//            save(pathSaveName, writer);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return scriptPath.toString();
-//
-//    }
+//            writer.println("_BOX");
+//            writer.println(0 + "," + 0);
+//            double perX2 = -2000;
+//            double pery2 = -40;
+//            writer.println(perX2 + "," + pery2);
+//            writer.println(20);
+
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+            String name = LocalDateTime.now().format(formatter) + "test.dwg";
+            String pathSaveName = path + name;
+            save(pathSaveName, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return scriptPath.toString();
+
+    }
+
+    private static void insertK3K(PrintWriter writer,String x, String y, String z, String s1, String s2, String h) {
+        writer.println("_K3K");
+        writer.println(x);
+        writer.println(y);
+        writer.println(z);
+        writer.println(s1);
+        writer.println(s2);
+        writer.println(h);
+    }
+    private static void insertK3S(PrintWriter writer,String x, String y, String z, String s1, String s2, String h) {
+        writer.println("_K3S");
+        writer.println(x);
+        writer.println(y);
+        writer.println(z);
+        writer.println(s1);
+        writer.println(s2);
+        writer.println(h);
+    }
 
     public static void drowZabPer(PrintWriter writer, double elev, double heightStupen) {
         if (elev % 2 != 0) {
@@ -975,6 +1004,7 @@ public class AcadScripCreate {
     }
 
     public String createScripts(Stair stair, String path) {
+
         int width = stair.getBetweenFlights() + stair.getFlightWidth() * 2;
         int length = stair.getUpperStairsCount() * stair.getStepDepth() + stair.getPlatform();
         double height = (stair.getLowerStairsCount() + stair.getUpperStairsCount() + 2) * stair.getStepHeight();

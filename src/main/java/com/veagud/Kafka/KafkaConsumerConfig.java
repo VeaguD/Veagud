@@ -14,11 +14,11 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@EnableKafka
-@Configuration
+//@EnableKafka
+//@Configuration
 public class KafkaConsumerConfig {
 
-    @Bean
+//    @Bean
     public ConsumerFactory<String, Stair> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -29,7 +29,7 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(), new JsonDeserializer<>(Stair.class));
     }
 
-    @Bean
+//    @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Stair> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Stair> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
