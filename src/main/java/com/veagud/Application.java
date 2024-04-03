@@ -11,24 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class Application {
 
     public static void main(String[] args) {
-        ConfigurationLoader configurationLoader = new ConfigurationLoader();
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
+
         SpringApplication.run(Application.class, args);
     }
 }

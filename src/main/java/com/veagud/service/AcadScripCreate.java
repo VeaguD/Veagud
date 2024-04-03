@@ -1004,6 +1004,24 @@ public class AcadScripCreate {
     }
 
     public String createScripts(Stair stair, String path) {
+        ConfigurationLoader configurationLoader = new ConfigurationLoader();
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
+        System.out.println(configurationLoader.getBranchName());
 
         int width = stair.getBetweenFlights() + stair.getFlightWidth() * 2;
         int length = stair.getUpperStairsCount() * stair.getStepDepth() + stair.getPlatform();
