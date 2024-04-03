@@ -60,18 +60,6 @@ AcadFreeScanLinesCallback
 HCRasterized::FreeScanLines
 AcadFreeScanLinesCallback
 HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
-AcadFreeScanLinesCallback
-HCRasterized::FreeScanLines
 Failed to find SSO server app AdSSO.exe in the following paths:
 C:/Program Files/Autodesk/AutoCAD 2022
 Failed to find SSO server app AdSSO.exe in the following paths:
@@ -143,6 +131,10 @@ C:/Program Files/Autodesk/AutoCAD 2022
 Failed to find version compatibility file SSOVersionCompatibility.config in the following paths:
 %SSOServerAppPath%
 Searching for compatible client plugin version for AdSSOServices version 12.3.3.1803 in version compatibility file SSOVersionCompatibility.config
+Version compatibility file SSOVersionCompatibility.config not found
+Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
+Client plugin module not found: 
+3.1803 in version compatibility file SSOVersionCompatibility.config
 Version compatibility file SSOVersionCompatibility.config not found
 Failed to find compatible client plugin version for AdSSOServices version 12.3.3.1803 since version compatibility file SSOVersionCompatibility.config is not found
 Client plugin module not found: 
