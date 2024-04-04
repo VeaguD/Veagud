@@ -1002,26 +1002,13 @@ public class AcadScripCreate {
         writer.println("_PLINE");
         writer.println(tochkaX + "," + tochkaY);
     }
+    @Value("${git.branch}")
+    String branchNamePro;
 
     public String createScripts(Stair stair, String path) {
-        ConfigurationLoader configurationLoader = new ConfigurationLoader();
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
-        System.out.println(configurationLoader.getBranchName());
+        System.out.println("Branch Name" + branchNamePro);
+
+
 
         int width = stair.getBetweenFlights() + stair.getFlightWidth() * 2;
         int length = stair.getUpperStairsCount() * stair.getStepDepth() + stair.getPlatform();
